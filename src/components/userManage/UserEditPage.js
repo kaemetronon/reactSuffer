@@ -5,10 +5,11 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
 
-class EditPage extends Component {
+class UserEditPage extends Component {
     constructor() {
         super();
         this.state = {
+            id: '',
             username: '',
             email: '',
             firstName: '',
@@ -28,7 +29,7 @@ class EditPage extends Component {
         const {
             id,
             username,
-            mail,
+            email,
             firstName,
             lastName
         } = nextProps.user
@@ -36,7 +37,7 @@ class EditPage extends Component {
         this.setState({
             id,
             username,
-            mail,
+            email,
             firstName,
             lastName
         })
@@ -44,7 +45,7 @@ class EditPage extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const editeduser = {
+        const editedUser = {
             id: this.state.id,
             username: this.state.username,
             email: this.state.email,
@@ -52,7 +53,7 @@ class EditPage extends Component {
             lastName: this.state.lastName,
             role: this.state.role
         }
-        editUser(editeduser, this.props.history)
+        this.props.editUser(editedUser, this.props.history)
     }
 
     onChange(e) {
@@ -88,10 +89,10 @@ class EditPage extends Component {
     }
 }
 
-EditPage.propTypes = {
+UserEditPage.propTypes = {
     getUser: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
     user: state.userR.user
 })
-export default connect(mapStateToProps, {getUser, editUser})(EditPage)
+export default connect(mapStateToProps, {getUser, editUser})(UserEditPage)

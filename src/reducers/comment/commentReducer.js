@@ -1,5 +1,7 @@
 import {
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    EDIT_COMMENT,
+    GET_ALL_COMMENTS
 } from "./commentTypes";
 
 const initialState = {
@@ -16,6 +18,22 @@ export default function(state = initialState, action) {
                     comment => comment.id !== action.payload
                 )
             };
+        case GET_ALL_COMMENTS:
+            return {
+                ...state,
+                comments: action.payload
+            }
+        case EDIT_COMMENT:
+            return {
+                ...state,
+                comments: state.comments.map(
+                    comment => {
+                        if (comment.id === action.payload.id) {
+                            comment = action.payload;
+                        }
+                    }
+                )
+            }
         default:
             return state;
     }

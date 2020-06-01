@@ -6,7 +6,7 @@ class HomePage extends Component {
     render() {
         return (
             <div>
-                <h5 class="display-4">Hello, {this.props.user}!</h5>
+                <h5 class="display-4">Hello, {this.props.user.name}!</h5>
         <div class="lead">
             Welcome to wretched MetaCritic for music! Enjoy. Or suffer, whatever you prefer.
         </div>

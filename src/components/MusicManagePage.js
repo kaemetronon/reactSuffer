@@ -33,8 +33,6 @@ class MusicManagePage extends Component {
         this.onSubmitArt = this.onSubmitArt.bind(this)
     }
 
-//2 onSubmit тк я не знаю как разделять обработки.
-// наверное что то в свойствах event'a есть, но я хз
     onSubmitArt(e) {
         e.preventDefault();
         const newArtist = {
@@ -88,7 +86,7 @@ class MusicManagePage extends Component {
                                                placeholder="Year of activity"/>
                                         <div className="custom-file">
                                             <input type="file"
-                                                   name="image" value={this.state.image}
+                                                   name="artLogo" value={this.state.image}
                                                    onChange={this.onChange} id="customFile2"/>
                                             <label className="custom-file-label" htmlFor="customFile2">New image</label>
                                         </div>
@@ -123,15 +121,15 @@ class MusicManagePage extends Component {
                                                onChange={this.onChange} className="form-control"
                                                placeholder="Artist name"/>
                                     </div>
-                                    <div className="form-group">
+
                                         <div className="custom-file">
                                             <input type="file"
-                                                   name="file" value={this.state.file}
+                                                   name="albCover" value={this.state.file}
                                                    onChange={this.onChange} id="customFile"/>
                                             <label className="custom-file-label" htmlFor="customFile">Choose
                                                 file</label>
                                         </div>
-                                    </div>
+
                                     <div className='form-group'>
                                         <select className='form-control form-control-lg'
                                                 name='genre' value={this.state.genre}
@@ -165,9 +163,5 @@ MusicManagePage.propTypes = {
     addArtist: PropTypes.func.isRequired,
     addAlbum: PropTypes.func.isRequired
 }
-
-const mapStateToProps = state => ({
-    //write here
-})
 
 export default connect(null, {addAlbum, addArtist}) (MusicManagePage)

@@ -6,12 +6,17 @@ import {Provider} from 'react-redux'
 import store from './store'
 
 import Navbar from "./components/Navbar";
-import AllAlbumsPage from "./components/AllAlbumsPage";
-import AllArtistsPage from "./components/AllArtistsPage";
+import AllAlbumsPage from "./components/album/AllAlbumsPage";
+import AllArtistsPage from "./components/artist/AllArtistsPage";
 import UserManagePage from "./components/userManage/UserManagePage";
 import MusicManagePage from "./components/MusicManagePage";
 import HomePage from "./components/HomePage";
-import EditPage from "./components/userManage/EditPage";
+import UserEditPage from "./components/userManage/UserEditPage";
+// import ArtistPage from "./components/artist/ArtistPage"
+import AlbumView from "./components/album/oneAlbum/AlbumView"
+import ManageAlbum from "./components/album/EditAlbum";
+import CommentEdit from "./components/album/CommentEdit";
+import EditArtist from './components/artist/EditArtist'
 
 
 class App extends Component{
@@ -23,11 +28,20 @@ class App extends Component{
                         <Navbar />
 
                         <Route exact path="/" component={HomePage} />
+
                         <Route exact path="/albums" component={AllAlbumsPage} />
+                        <Route exact path="/album/:alb_id" component={AlbumView} />
+                        <Route exact path="/album/:alb_id/comment/:comment_id/edit" component={CommentEdit} />
+
                         <Route exact path="/artists" component={AllArtistsPage} />
+                        {/*<Route exact path="/artist/:art_id" component={ArtistPage} />*/}
+                        <Route exact path="/artist/:art_id}/edit" component={EditArtist} />
+
                         <Route exact path="/user" component={UserManagePage} />
-                        <Route exact path="/editPage/:id" component={EditPage} />
+                        <Route exact path="/editPage/:id" component={UserEditPage} />
+
                         <Route exact path="/music-manage" component={MusicManagePage} />
+                        <Route exact path="/music-manage/album/:alb_id" component={ManageAlbum} />
 
                     </div>
                 </Router>

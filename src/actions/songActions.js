@@ -2,9 +2,8 @@ import axios from "axios";
 import {DELETE_SONG} from "../reducers/song/songTypes";
 
 
-export const addSong = (albId, song, history) => async  dispatch => {
+export const addSong = (albId, song) => async  dispatch => {
     await axios.post(`http://localhost:8080/music-manage/album/${albId}/addSong`, song);
-    history.push(`/album/${albId}`)
 }
 
 export const deleteSong = (albId, songId) => async dispatch => {

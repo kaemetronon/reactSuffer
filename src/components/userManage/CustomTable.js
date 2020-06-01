@@ -20,7 +20,7 @@ class CustomTable extends Component {
                         <th>Last Name</th>
                         <th>E-mail</th>
                         <th>role</th>
-                        <th>isactive</th>
+                        <th>isActive</th>
                         <th>edit</th>
                     </tr>
                     </thead>
