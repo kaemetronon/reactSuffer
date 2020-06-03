@@ -1,7 +1,8 @@
 import axios from "axios";
 import {
     GET_ALL_USERS,
-    GET_USER
+    GET_USER,
+    LOG_OUT
 } from "../reducers/user/userTypes";
 
 // export const getUser = (id) => async dispatch => {
@@ -63,13 +64,19 @@ export const editUser = (user, history) => async dispatch => {
     history.push("/users")
 }
 
-// export const addUser = (userDto, history) => async  dispatch => {
-//     await axios.post(`http://localhost:8080/registration`, userDto);
-//     history.push(`/login`)
-// }
+export const addUser = (userDto, history) => async  dispatch => {
+    await axios.post(`http://localhost:8080/registration`, userDto);
+    history.push(`/login`)
+}
 
-// export const activateUser = (code, history) => async  dispatch => {
-//     await axios.post(`http://localhost:8080/activate/${code}`);
-//     history.push(`/login`)
-// }
+export const logIn = (userDto, history) => async  dispatch => {
+    await axios.post(`http://localhost:8080/login`, userDto);
+    history.push(`/login`)
+}
 
+export const logOut = () => async  dispatch => {
+    // хз какой запрос к серверу должен быть на этот случай
+    dispatch({
+        type: LOG_OUT
+    })
+}

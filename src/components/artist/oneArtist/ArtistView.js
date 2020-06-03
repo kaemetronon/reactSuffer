@@ -1,96 +1,76 @@
 import React, {Component} from 'react'
-import {Link} from "react-router-dom";
-import {getAlbum, deleteAlbum} from "../../../actions/albumActions";
-import {getAllComments} from "../../../actions/commentActions";
-import PropTypes from 'prop-types'
 import {connect} from "react-redux";
-import SongBoard from './SongBoard'
-import CommentBoard from './CommentBoard'
+import MainArtistInfo from "./MainArtistInfo";
+import MiniAlbumPage from "../../album/MiniAlbumPage";
+import {getArtist} from '../../../actions/artistActions'
+import {getAlbumsByArtist} from "../../../actions/albumActions";
+import PropTypes from 'prop-types'
 
 
 class ArtistView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            alb_id: '',
-            file: '',
-            name: '',
-            artist: '',
-            genre: '',
-            averageScore: '',
-            songs: '',
-            comments: ''
+            artist: {},
+            albums: []
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        const {
-            alb_id,
-            file,
-            name,
-            artist,
-            genre,
-            averageScore,
-            songs
-        } = nextProps.album
-        const comments = nextProps.comments;
         this.setState({
-            alb_id,
-            file,
-            name,
-            artist,
-            genre,
-            averageScore,
-            songs,
-            comments
+            artist: nextProps.artist,
+            albums: nextProps.albums
         })
     }
 
     componentDidMount() {
-        const {alb_id} = this.props.match.params;
-        this.props.getAlbum(alb_id);
-        this.props.getAllComments(alb_id);
-    }
-
-    onClick(alb_id){
-        this.props.deleteAlbum(alb_id, this.props.history);
+        const {art_id} = this.props.match.params;
+        this.props.getArtist(art_id);
+        this.props.getAlbumsByArtist(art_id)
     }
 
     render() {
-        const album = this.props.album;
+        const isAdmin = true; //huh, that's a plug!
 
-        const isAdmin = () => {
-            if (true) {
+        let totalRes;
+        let resultArray=[];
+
+        const renderAlgorithm = albums => {
+            if (albums.length < 1) {
+                return (<p className="lead">No albums yet</p>);
+            } else {
+                const oneAlbum = albums.map(album => (
+                    <MiniAlbumPage key={album.alb_id} album={album}/>
+                ));
+                for (let i = 0; i < oneAlbum.length; i++) {
+                    resultArray.push(oneAlbum[i])
+                }
                 return (
-                    <React.Fragment>
-                        <Link to={`/music-manage/album/${this.state.alb_id}`} className="btn btn-primary">
-                            Edit
-                        </Link>
-                        <button className="btn btn-secondary"
-                                onClick={this.onClick.bind(this, this.state.alb_id)}>
-                            Delete
-                        </button>
-                    </React.Fragment>
-                )
+                    <React.Fragment>{resultArray}</React.Fragment>
+                );
             }
-        }
-        const adminOptions = isAdmin();
+        };
+        totalRes = renderAlgorithm(this.state.albums);
+
 
         return (
-            <div></div>
+            <div>
+                <MainArtistInfo artist={this.state.artist} adminFlag ={isAdmin}/>
+                {totalRes}
+            </div>
         )
     }
 }
 
 ArtistView.propTypes = {
-    getAlbum: PropTypes.func.isRequired,
-    album: PropTypes.object.isRequired,
-    comments: PropTypes.array.isRequired,
-    deleteAlbum: PropTypes.func.isRequired,
+    getArtist: PropTypes.func.isRequired,
+    getAlbumsByArtist: PropTypes.func.isRequired,
+    artist: PropTypes.object.isRequired,
+    albums: PropTypes.array.isRequired
 }
 const mapStateToProps = state => ({
-    album: state.albumR.album,
-    comments: state.commentR.comments
+    artist: state.artistR.artist,
+    albums: state.albumR.albumsByArtist
 })
 
-export default connect(mapStateToProps, {getAlbum, getAllComments, deleteAlbum})(ArtistView)
+export default connect(mapStateToProps, {getArtist, getAlbumsByArtist})(ArtistView)

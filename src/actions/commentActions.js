@@ -2,7 +2,7 @@ import axios from "axios";
 import {GET_ALL_COMMENTS, EDIT_COMMENT, DELETE_COMMENT} from "../reducers/comment/commentTypes";
 
 export const addComment = (albId, comment, history) => async dispatch => {
-    await axios.post(`http://localhost:8080/album/${albId}/addComment`, comment);
+    await axios.post(`http://localhost:8080/album/${albId}`, comment);
     history.push(`/album/${albId}`)
 }
 
@@ -15,6 +15,13 @@ export const commentEdit = (albId, commentId, comment, history) => async dispatc
     history.push(`/album/${albId}`)
 }
 
+// export const getAllComments = (albId) => async dispatch => {
+//     const res = await axios.get(`http://localhost:8080/album/${albId}/comments`)
+//     dispatch({
+//         type: GET_ALL_COMMENTS,
+//         payload: res
+//     });
+// }
 export const getAllComments = (albId) => async dispatch => {
     const res = [{
         commId: '0',

@@ -1,17 +1,25 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
+import {logOut} from '../actions/userActions'
+import PropTypes from 'prop-types'
+
 
 class Navbar extends Component {
+
+    onClick() {
+        this.props.logOut();
+    }
 
     render() {
         let adminPanel;
         let forPeopleWhoSuccessfulyLoggedInToOurGorgeousWebSite;
         const name = this.props.user
+        const isAdmin = true; // plug
 
-        const isAdmin = () => {
-            //хз пока как проверять на админа
-            if (/*some magic */ true/*true типа админ */) {
+
+        const adminRenderFunc = (isAdmin) => {
+            if (isAdmin) {
                 return (
                     <React.Fragment>
                         <li className="nav-item">
@@ -22,31 +30,31 @@ class Navbar extends Component {
                         </li>
                     </React.Fragment>
                 )
-            } else return ''
+            }
         };
 
         const isLoggedIn = () => {
             if (name === 'guest') {
                 return (
                     <React.Fragment>
-                        <form action="/login" method="post">
+                        <Link to={"/sign-in"}>
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button className="btn btn-primary" type="submit">Log In</button>
-                        </form>
+                        </Link>
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <form action="/logout" method="post">
+                        <Link to={"/sign-in"} onClick={this.onClick.bind(this)} method="post">
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button className="btn btn-primary" type="submit">Log Out</button>
-                        </form>
+                        </Link>
                     </React.Fragment>
                 )
             }
         };
-        adminPanel = isAdmin();
+        adminPanel = adminRenderFunc(isAdmin);
         forPeopleWhoSuccessfulyLoggedInToOurGorgeousWebSite = isLoggedIn();
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -82,9 +90,12 @@ class Navbar extends Component {
         );
     }
 }
+Navbar.propTypes = {
+    logOut: PropTypes.func.isRequired
+}
 
 const mapStateToProps = state => ({
     user: state.userR.user.name
 })
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps, null)(Navbar)

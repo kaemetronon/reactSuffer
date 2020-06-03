@@ -21,7 +21,7 @@ class CommentEdit extends Component {
             text: this.state.text,
             mark: this.state.mark
         }
-        commentEdit(alb_id, comment_id, editedComment, this.props.history)
+        this.props.commentEdit(alb_id, comment_id, editedComment, this.props.history)
     }
 
     render() {

@@ -8,7 +8,7 @@ class HomePage extends Component {
             <div>
                 <h5 class="display-4">Hello, {this.props.user.name}!</h5>
         <div class="lead">
-            Welcome to wretched MetaCritic for music! Enjoy. Or suffer, whatever you prefer.
+            Welcome to our delightful MetaCritic for music! Enjoy. There is no other way.
         </div>
             </div>
         )

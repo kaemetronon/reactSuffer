@@ -51,7 +51,7 @@ class EditAlbum extends Component {
             genre: this.state.genre,
             file: this.state.file,
         }
-        addAlbum(newAlbum, this.props.history)
+        this.props.addAlbum(newAlbum, this.props.history)
     }
 
     onAdd(e) {

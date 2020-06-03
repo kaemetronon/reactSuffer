@@ -31,6 +31,7 @@ export default function(state = initialState, action) {
                         if (comment.id === action.payload.id) {
                             comment = action.payload;
                         }
+                        return comment;
                     }
                 )
             }

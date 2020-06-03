@@ -12,11 +12,13 @@ import UserManagePage from "./components/userManage/UserManagePage";
 import MusicManagePage from "./components/MusicManagePage";
 import HomePage from "./components/HomePage";
 import UserEditPage from "./components/userManage/UserEditPage";
-// import ArtistPage from "./components/artist/ArtistPage"
+ import ArtistView from "./components/artist/oneArtist/ArtistView"
 import AlbumView from "./components/album/oneAlbum/AlbumView"
 import ManageAlbum from "./components/album/EditAlbum";
 import CommentEdit from "./components/album/CommentEdit";
 import EditArtist from './components/artist/EditArtist'
+import Register from "./components/Register";
+import SignIn from "./components/SignIn";
 
 
 class App extends Component{
@@ -27,6 +29,9 @@ class App extends Component{
                     <div className='App'>
                         <Navbar />
 
+                        <Route exact path="/registration" component={Register} />
+                        <Route exact path="/sign-in" component={SignIn} />
+
                         <Route exact path="/" component={HomePage} />
 
                         <Route exact path="/albums" component={AllAlbumsPage} />
@@ -34,8 +39,8 @@ class App extends Component{
                         <Route exact path="/album/:alb_id/comment/:comment_id/edit" component={CommentEdit} />
 
                         <Route exact path="/artists" component={AllArtistsPage} />
-                        {/*<Route exact path="/artist/:art_id" component={ArtistPage} />*/}
-                        <Route exact path="/artist/:art_id}/edit" component={EditArtist} />
+                        <Route exact path="/artist/:art_id" component={ArtistView} />
+                        <Route exact path="/artist/:art_id/edit" component={EditArtist} />
 
                         <Route exact path="/user" component={UserManagePage} />
                         <Route exact path="/editPage/:id" component={UserEditPage} />

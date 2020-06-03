@@ -6,13 +6,26 @@ import {
     DELETE_ARTIST
 } from "../reducers/artist/artistTypes";
 
-// export const getArtist = (id, history) => async dispatch => {
+// export const getArtist = (id) => async dispatch => {
 //     const res = await axios.get(`http://localhost:8080/artist/${id}`);
 //     dispatch({
 //         type: GET_ARTIST,
 //         payload: res.data
 //     });
 // };
+export const getArtist = (id) => async dispatch => {
+    const res = {
+        id: '0',
+        name: 'artName1',
+        year: '14',
+        imagePath: 'aga',
+        description: "desc for 1"
+    }
+    dispatch({
+        type: GET_ARTIST,
+        payload: res
+    });
+};
 
 // export const getAllArtists = () => async dispatch => {
 //     const res = await axios.get(`http://localhost:8080/artist/all`);
@@ -46,29 +59,25 @@ export const addArtist = (artist, history) => async  dispatch => {
     history.push("/artists")
 }
 
-export const editArtist = (artist) => async dispatch => {
-    const res = {
-        id: '0',
-        name: 'artName1',
-        year: '14',
-        imagePath: 'aga',
-        description: "desc for 1"
-    }
-    dispatch({
-        type: EDIT_ARTIST,
-        payload: res
-    });
-};
-// export const deleteArtist = (id, name) => async dispatch => {
-//     if (
-//         window.confirm(
-//             `You are deleting artist ${name}, this action cannot be undone`
-//         )
-//     ) {
-//         await axios.delete(`http://localhost:8080/artist/${id}`);
-//         dispatch({
-//             type: DELETE_ARTIST,
-//             payload: id
-//         });
-//     }
+// export const editArtist = (artist) => async dispatch => {
+//     const res = await axios.put(`http://localhost:8080/music-manage/addArtist`, artist);
+//     dispatch({
+//         type: EDIT_ARTIST,
+//         payload: res
+//     });
 // };
+
+export const deleteArtist = (id, name, history) => async dispatch => {
+    if (
+        window.confirm(
+            `You are deleting artist ${name}, this action cannot be undone`
+        )
+    ) {
+        await axios.delete(`http://localhost:8080/artist/${id}`);
+        dispatch({
+            type: DELETE_ARTIST,
+            payload: id
+        });
+        history.push("/artists");
+    }
+};

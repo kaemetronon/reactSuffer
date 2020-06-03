@@ -1,11 +1,13 @@
 import {
     GET_ALL_ALBUMS,
     GET_ALBUM,
-    DELETE_ALBUM
+    DELETE_ALBUM,
+    GET_ALBUMS_BY_ARTIST
 } from "./albumTypes";
 
 const initialState = {
     albums: [],
+    albumsByArtist: [],
     album: {}
 };
 
@@ -16,7 +18,11 @@ export default function(state = initialState, action) {
                 ...state,
                 albums: action.payload
             };
-
+        case GET_ALBUMS_BY_ARTIST:
+        return {
+            ...state,
+            albumsByArtist: action.payload
+        }
         case GET_ALBUM:
             return {
                 ...state,

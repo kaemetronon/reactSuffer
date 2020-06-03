@@ -2,7 +2,8 @@ import {
     GET_ALL_USERS,
     GET_USER,
     ADD_USER,
-    ACTIVATE_USER
+    ACTIVATE_USER,
+    LOG_OUT
 } from "./userTypes";
 
 const initialState = {
@@ -22,17 +23,11 @@ export default function(state = initialState, action) {
                 ...state,
                 user: action.payload
             };
-        case ADD_USER:
+        case LOG_OUT:
             return {
-                // ...state,
-                // users: action.payload
-            };
-
-        case ACTIVATE_USER:
-            return {
-                // ...state,
-                // user: action.payload
-            };
+                ...state,
+                user: {name: 'guest'}
+            }
         default:
             return state;
     }

@@ -25,15 +25,12 @@ export default function(state = initialState, action) {
         case EDIT_ARTIST:
             return {
                 ...state,
-                artist: action.payload
-            };
-            return {
-                ...state,
                 artists: state.artists.map(
                     artist => {
                         if (artist.id === action.payload.id) {
                             artist = action.payload;
                         }
+                        return artist;
                     }
                 )
             }
