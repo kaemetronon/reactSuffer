@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {commentEdit} from '../../actions/commentActions'
+
 class CommentEdit extends Component {
 
     constructor() {
@@ -11,13 +12,15 @@ class CommentEdit extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this)
     }
+
     onChange(e) {
         this.setState({[e.target.name]: e.target.value})
     }
+
     onSubmit(e) {
         e.preventDefault();
         const {alb_id, comment_id} = this.props.match.params;
-        const editedComment ={
+        const editedComment = {
             text: this.state.text,
             mark: this.state.mark
         }
@@ -34,14 +37,14 @@ class CommentEdit extends Component {
                                name="text"
                                value={this.state.text}
                                onChange={this.onChange}
-                               placeholder="Text" />
-                            <input type="text" className="form-control"
-                                   name="mark"
-                                   value={this.state.mark}
-                                   onChange={this.onChange}
-                                   placeholder="Your mark (1-10)" />
-                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                <button type="submit" className="btn btn-primary ml-3">Save</button>
+                               placeholder="Text"/>
+                        <input type="text" className="form-control"
+                               name="mark"
+                               value={this.state.mark}
+                               onChange={this.onChange}
+                               placeholder="Your mark (1-10)"/>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                        <button type="submit" className="btn btn-primary ml-3">Save</button>
                     </form>
                 </div>
             </div>

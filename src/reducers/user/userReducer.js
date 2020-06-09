@@ -8,7 +8,7 @@ import {
 
 const initialState = {
     users: [],
-    user: {name: 'guest'}
+    user: {name: 'Steeeeve'}
 };
 
 export default function(state = initialState, action) {

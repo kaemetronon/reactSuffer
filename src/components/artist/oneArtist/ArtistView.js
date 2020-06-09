@@ -56,7 +56,9 @@ class ArtistView extends Component {
         return (
             <div>
                 <MainArtistInfo artist={this.state.artist} adminFlag ={isAdmin}/>
-                {totalRes}
+                <div className="card-columns">
+                    {totalRes}
+                </div>
             </div>
         )
     }

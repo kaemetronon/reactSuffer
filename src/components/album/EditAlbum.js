@@ -27,14 +27,16 @@ class EditAlbum extends Component {
             alb_name,
             art_name,
             genre,
-            songs
+            songs,
+            file
         } = nextProps.album
         this.setState({
             alb_id,
             alb_name,
             art_name,
             genre,
-            songs
+            songs,
+            file
         })
     }
 
@@ -82,8 +84,9 @@ class EditAlbum extends Component {
             } else {
                 const songObject = songs.map(song =>
                     <li className="list-group-item">{song.number}. {song.song_name}
-                    <button className="btn btn-secondary btn-sm"
-                            onClick={this.onDel.bind(this, song.id)}>Delete</button>
+                        <button className="btn btn-secondary btn-sm" style={{float:"right"}}
+                                onClick={this.onDel.bind(this, song.id)}>Delete
+                        </button>
                     </li>
                 )
                 return (<React.Fragment>{songObject}</React.Fragment>)
@@ -95,69 +98,76 @@ class EditAlbum extends Component {
             <div>
                 <div>
                     <h1 className="display-4">Music editor</h1>
-                    <img src={`/img/${this.state.file}`} className="img-thumbnail mr-4"/>
-                    <ul class="list-group">
-                        {songBoard}
-                    </ul>
-                    <div className="form-group col-md-6">
-                        <form className="form-group" onSubmit={this.onSave}
-                              encType="multipart/form-data">
-                            <input type="text" className="form-control" placeholder="Artist name"
-                                   name="art_name"
-                                   value={this.state.art_name}
-                                   onChange={this.onChange} />
-                            <input type="text" className="form-control" placeholder="Album name"
-                                   name="alb_name"
-                                   value={this.state.alb_name}
-                                   onChange={this.onChange} />
-                            <select className='form-control form-control-lg'
-                                    name='genre'
-                                    value={this.state.genre}
-                                    onChange={this.onChange}>
-                                <option value='ROCK'>ROCK</option>
-                                <option value='HIP-HOP'>HIP-HOP</option>
-                                <option value='POP'>POP</option>
-                                <option value='JAZZ'>JAZZ</option>
-                                <option value='BLUES'>BLUES</option>
-                                <option value='ELECTRONIC'>ELECTRONIC</option>
-                                <option value='LATIN'>LATIN</option>
-                                <option value='OTHER'>OTHER</option>
-                            </select>
-                            <div className="custom-file">
-                                <input type="file"
-                                       name="albCover"
-                                       value={this.state.file}
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <img src={`/image/covers/${this.state.file}`} className="img-thumbnail mr-4"/>
+                        </div>
+                        <div className="col-lg-3">
+                            <ul className="list-group">
+                                {songBoard}
+                            </ul>
+                        </div>
+                        <div className="form-group col-md-6">
+                            <form className="form-group" onSubmit={this.onSave}
+                                  encType="multipart/form-data" style={{marginBottom:'100px'}}>
+                                <input type="text" className="form-control" placeholder="Artist name"
+                                       style={{marginBottom:'5px'}}
+                                       name="art_name"
+                                       value={this.state.art_name}
                                        onChange={this.onChange}/>
-                                <label className="custom-file-label">New image</label>
-                            </div>
-                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                            <button type="submit" className="btn btn-primary ml-3">Save</button>
-                        </form>
-                    </div>
-                </div>
+                                <input type="text" className="form-control" placeholder="Album name"
+                                       style={{marginBottom:'5px'}}
+                                       name="alb_name"
+                                       value={this.state.alb_name}
+                                       onChange={this.onChange}/>
+                                <select className='form-control form-control-lg'
+                                        style={{marginBottom:'5px'}}
+                                        name='genre'
+                                        value={this.state.genre}
+                                        onChange={this.onChange}>
+                                    <option value='ROCK'>ROCK</option>
+                                    <option value='HIP-HOP'>HIP-HOP</option>
+                                    <option value='POP'>POP</option>
+                                    <option value='JAZZ'>JAZZ</option>
+                                    <option value='BLUES'>BLUES</option>
+                                    <option value='ELECTRONIC'>ELECTRONIC</option>
+                                    <option value='LATIN'>LATIN</option>
+                                    <option value='OTHER'>OTHER</option>
+                                </select>
+                                <div className="custom-file" style={{marginBottom:'5px'}}>
+                                    <input type="file"
+                                           name="albCover"
+                                        // value={this.state.file}
+                                           onChange={this.onChange}/>
+                                    <label className="custom-file-label">New image</label>
+                                </div>
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                <button type="submit" className="btn btn-primary ml-3" style={{marginBottom:'5px'}}>Save</button>
+                            </form>
+                            Add song
 
-                <a className="btn btn-primary m-3" data-toggle="collapse" href="#collapseExample" role="button"
-                   aria-expanded="false" aria-controls="collapseExample">
-                    Add song
-                </a>
-                <div className="collapse" id="collapseExample">
-                    <div className="form-group mt-3">
-                        <form onSubmit={this.onAdd}
-                              encType="multipart/form-data">
-                            <div className="form-group">
-                                <input type="text" name="songName" className="form-control" placeholder="Song name:"/>
-                            </div>
-                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary">Add</button>
-                            </div>
-                        </form>
+                                <div className="form-group mt-3">
+                                    <form onSubmit={this.onAdd}
+                                          encType="multipart/form-data">
+                                        <div className="form-group">
+                                            <input type="text" name="songName" className="form-control"
+                                                   placeholder="Song name:"/>
+                                        </div>
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                        <div className="form-group">
+                                            <button type="submit" className="btn btn-primary">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
                     </div>
-                </div>
+
+                    </div>
             </div>
         )
     }
 }
+
 EditAlbum.propTypes = {
     getAlbum: PropTypes.func.isRequired,
     deleteSong: PropTypes.func.isRequired,

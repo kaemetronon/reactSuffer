@@ -34,9 +34,7 @@ class AllAlbumsPage extends Component {
 
         return (
             <div className="card-columns">
-                <div className='card my-3'>
                     {totalRes}
-                </div>
             </div>
         )
     }

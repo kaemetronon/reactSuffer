@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 
-
 class SongBoard extends Component {
 
     render() {
@@ -12,7 +11,7 @@ class SongBoard extends Component {
                 return (<p className="lead">No songs yet</p>)
             } else {
                 const songsObjects = songs.map(song =>
-                    <li className="list-group-item">{++song.number}. {song.song_name}</li>
+                    <li className="list-group-item">{song.number}. {song.song_name}</li>
                 )
                 return (
                     <React.Fragment>

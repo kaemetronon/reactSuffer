@@ -76,7 +76,7 @@ class UserEditPage extends Component {
                         <div className='form-group'>
                             <select className='form-control form-control-lg'
                                     name='role' value={this.state.role} onChange={this.onChange}
-                                    placeholder='new role'>
+                                    placeholder='new role' style={{marginTop:'20px'}}>
                                 <option value='USER'>USER</option>
                                 <option value='ADMIN'>ADMIN</option>
                             </select>

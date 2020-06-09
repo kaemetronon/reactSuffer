@@ -15,12 +15,12 @@ import {
 export const getUser = (id) => async dispatch => {
     const res = {
         id: '0',
-        username: 'u1',
-        role: 'r1',
-        firstName: 'f1',
-        lastName: 'l1',
-        email: 'taganrulezz14@gmail.com',
-        isActive: 'i1'
+        username: 'Steeeeve',
+        role: 'ADMIN',
+        firstName: 'Sergey',
+        lastName: 'Wozniak',
+        email: 'st_wozniak@outlook.com',
+        isActive: 'true'
     }
     dispatch({
         type: GET_USER,
@@ -38,20 +38,20 @@ export const getUser = (id) => async dispatch => {
 export const getAllUsers = () => async dispatch => {
     const res = [{
         id: '0',
-        username: 'u1',
-        role: 'r1',
-        firstName: 'f1',
-        lastName: 'l1',
-        email: 'taganrulezz14@gmail.com',
-        isActive: 'i1'
+        username: 'Steeeeve',
+        role: 'ADMIN',
+        firstName: 'Sergey',
+        lastName: 'Wozniak',
+        email: 'st_wozniak@outlook.com',
+        isActive: 'true'
     }, {
         id: '1',
-        username: 'u2',
-        role: 'r2',
-        firstName: 'f2',
-        lastName: 'l2',
-        email: 'taganrulezz14@gmail.com',
-        isActive: 'i2'
+        username: 'BringMeThe',
+        role: 'USER',
+        firstName: 'Steve',
+        lastName: 'Brin',
+        email: 'gogogo@gmail.com',
+        isActive: 'true'
     }]; // допустим это получили из стейта
     dispatch({
         type: GET_ALL_USERS,

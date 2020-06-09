@@ -18,7 +18,7 @@ class MiniArtistPage extends Component {
 
         return (
             <div class="card my-3">
-                <img src={`/img/{artist.imagePath}`} class="card-img-top rounded"/>
+                <img src={`/image/artists/${artist.image}`} class="card-img-top rounded" style={{maxWidth:'200px',maxHeigth:'200px'}}/>
 
                 <div class="m-2">
                     <span class="lead">{artist.name}</span>

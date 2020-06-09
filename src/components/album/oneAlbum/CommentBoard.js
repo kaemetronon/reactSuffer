@@ -21,7 +21,7 @@ class CommentBoard extends Component {
                 return (
                     <React.Fragment>
                         <Link to={`/album/${alb_id}/comment/${commentId}/edit`}
-                           className="btn btn-primary">Edit</Link>
+                           className="btn btn-primary" style={{marginRight:'1px',marginLeft:'5px'}}>Edit</Link>
                         <button className="btn btn-secondary"
                                 onClick={this.onClick.bind(this, alb_id, commentId)}>
                             Delete
@@ -41,16 +41,16 @@ class CommentBoard extends Component {
                         const additionalBlock = additionalAlgorithm(isAdmin, commentAuthor, tempUserName, comm_id);
                         return (
                             <React.Fragment>
-                                <div className="card mb-3 row no-gutters col-md-8 card-body" align="left">
-                                    <div style={{overflow:"hidden"}}>
+                                <div className="card row card-body">
+                                    <div >
                                         <div style={{float:"left"}}><p className="lead">by {comment.userName}</p></div>
                                         <div style={{float:"right"}}>
-                                            <p className="text-muted">{comment.time}
+                                            <p className="text-muted" >{comment.time}
                                                 {additionalBlock}
                                             </p>
                                         </div>
                                         <div style={{overflow:"hidden"}}>
-                                            <div style={{float: "left"}}><p className="lead"></p>{comment.text}</div>
+                                            <div style={{float: "left",marginTop:'20px'}}><p className="lead"></p><h5>{comment.text}</h5></div>
                                             <div style={{float: "right"}}><h5 className="display-4">{comment.mark}</h5>
                                             </div>
                                         </div>

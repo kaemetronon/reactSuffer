@@ -10,7 +10,7 @@ class EditArtist extends Component {
             name: '',
             year: '',
             description: '',
-            img: ''
+            image: ''
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -21,13 +21,13 @@ class EditArtist extends Component {
             name,
             year,
             description,
-            img
+            image
         } = nextProps.artist
         this.setState({
             name,
             year,
             description,
-            img
+            image
         })
     }
 
@@ -42,7 +42,7 @@ class EditArtist extends Component {
             name: this.state.name,
             years: this.state.years,
             description: this.state.description,
-            file: this.state.file,
+            image: this.state.image,
         }
         this.props.addArtist(newAlbum, this.props.history)
     }
@@ -52,13 +52,13 @@ class EditArtist extends Component {
     }
 
     render() {
-        console.log(this.state.name)
         return (
             <div>
                 <h1 className="display-4">Artist editor</h1>
 
                 <div className="form-row">
-                    <img src={`/img/{artist.img}`} className="img-thumbnail"/>
+                    <img src={`/image/artists/${this.state.image}`} className="img-thumbnail"
+                         style={{maxWidth:'400px',maxHeigth:'400px'}}/>
 
                     <div className="form-group col-md-6">
                         <form className="form-group" onSubmit={this.onSubmit} encType="multipart/form-data">
@@ -79,9 +79,9 @@ class EditArtist extends Component {
                             </div>
                             <div className="form-group">
                                 <div className="custom-file">
-                                    <input type="file"
-                                           name="img"
-                                           value={this.state.img}
+                                    <input type="image"
+                                           name="imagePath"
+                                           value={this.state.image}
                                            onChange={this.onChange} id="customFile"/>
                                     <label className="custom-file-label">New image</label>
                                 </div>

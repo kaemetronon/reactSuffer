@@ -25,18 +25,18 @@ export const commentEdit = (albId, commentId, comment, history) => async dispatc
 export const getAllComments = (albId) => async dispatch => {
     const res = [{
         commId: '0',
-        albName: 'album1',
-        userName: 'user1',
-        text: 'text1',
-        mark: '8',
-        time: '4:20PM'
+        albName: 'A beautiful lie',
+        userName: 'Steeeeve',
+        text: 'Perfect!',
+        mark: '10',
+        time: '3:19PM'
     }, {
         commId: '1',
-        albName: 'album2',
-        userName: 'user2',
-        text: 'text2',
+        albName: 'Master Of Puppets',
+        userName: 'BringMeThe',
+        text: 'Old school',
         mark: '9',
-        time: '14:88AM'
+        time: '2:00AM'
     }];
     dispatch({
         type: GET_ALL_COMMENTS,

@@ -23,6 +23,15 @@ class Navbar extends Component {
                 return (
                     <React.Fragment>
                         <li className="nav-item">
+                            <Link to='/' className="nav-link">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/albums' className="nav-link">Albums</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/artists' className="nav-link">Artists</Link>
+                        </li>
+                        <li className="nav-item">
                             <Link to="/user" className="nav-link">User List</Link>
                         </li>
                         <li className="nav-item">
@@ -68,16 +77,6 @@ class Navbar extends Component {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link to='/' className="nav-link">Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to='/albums' className="nav-link">Albums</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to='/artists' className="nav-link">Artists</Link>
-                            </li>
-
                             {adminPanel}
                         </ul>
 
