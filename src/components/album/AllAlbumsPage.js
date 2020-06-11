@@ -14,7 +14,7 @@ class AllAlbumsPage extends Component {
         const albums = this.props.albums;
         let resultArray = [];
         let totalRes;
-        const {isAdmin} = this.props
+        const isAdmin = true //plug
 
         const renderAlgorithm = albums => {
             if (albums.length < 1) {

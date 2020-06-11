@@ -30,7 +30,7 @@ class ArtistView extends Component {
     }
 
     render() {
-        const {isAdmin} = this.props
+        const isAdmin = true
         let totalRes;
         let resultArray=[];
 

@@ -67,7 +67,7 @@ class AlbumView extends Component {
 
     render() {
         const {album} = this.props
-        const {isAdmin} = this.props
+        const isAdmin = true //plug
 
         const adminBlock = (isAdmin) => {
             if (isAdmin) {
@@ -91,7 +91,7 @@ class AlbumView extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
-                        <img src={`/image/covers/${album.file}`} className="card-img" alt={album.file}/>
+                        <img src={`/image/covers/${album.cover}`} className="card-img" alt={album.file}/>
                         <h5 className="display-4">{this.state.name}</h5>
                         <p className="lead">by {this.state.artist}</p>
                         <p className="lead">Genre: {this.state.genre}</p>

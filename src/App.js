@@ -12,7 +12,7 @@ import UserManagePage from "./components/userManage/UserManagePage";
 import MusicManagePage from "./components/MusicManagePage";
 import HomePage from "./components/HomePage";
 import UserEditPage from "./components/userManage/UserEditPage";
- import ArtistView from "./components/artist/oneArtist/ArtistView"
+import ArtistView from "./components/artist/oneArtist/ArtistView"
 import AlbumView from "./components/album/oneAlbum/AlbumView"
 import ManageAlbum from "./components/album/EditAlbum";
 import CommentEdit from "./components/album/CommentEdit";
@@ -36,22 +36,12 @@ class App extends Component{
 
                         <Route exact path="/" component={HomePage} />
 
-                        <Route exact path="/albums"
-                               render={props => <AllAlbumsPage isAdmin={isAdmin}/>}
-                        />
-                        <Route exact path="/album/:alb_id"
-                               render={props => <AlbumView isAdmin={isAdmin}/>}
-                        />
-                        <Route exact path="/album/:alb_id/comment/:comment_id/edit"
-                               render={props => <CommentEdit isAdmin={isAdmin}/>}
-                        />
+                        <Route exact path="/albums" component={AllAlbumsPage} />
+                        <Route exact path="/album/:alb_id" component={AlbumView} />
+                        <Route exact path="/album/:alb_id/comment/:comment_id/edit" component={CommentEdit} />
 
-                        <Route exact path="/artists"
-                               render={props => <AllArtistsPage isAdmin={isAdmin}/>}
-                        />
-                        <Route exact path="/artist/:art_id"
-                               render={props => <ArtistView isAdmin={isAdmin}/>}
-                        />
+                        <Route exact path="/artists" component={AllArtistsPage} />
+                        <Route exact path="/artist/:art_id" component={ArtistView} />
                         <Route exact path="/artist/:art_id/edit" component={EditArtist} />
 
                         <Route exact path="/user" component={UserManagePage} />

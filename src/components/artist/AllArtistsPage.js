@@ -14,7 +14,7 @@ class AllArtistsPage extends Component {
         const artists = this.props.artists;
         let resultArray = [];
         let totalRes;
-        const {isAdmin} = this.props
+        const isAdmin = true
 
         const renderAlgorithm = artists => {
             if (artists.length < 1) {
