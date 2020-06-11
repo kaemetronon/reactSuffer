@@ -7,7 +7,8 @@ import {connect} from "react-redux";
 import SongBoard from './SongBoard'
 import CommentBoard from './CommentBoard'
 import {addComment} from "../../../actions/commentActions";
-// import cover from '../../../../public/image/a beautiful lie.jpg'
+import AddComment from "./AddComment";
+
 
 class AlbumView extends Component {
     constructor(props) {
@@ -25,8 +26,8 @@ class AlbumView extends Component {
             mark: ''
         }
         this.onDelClick = this.onDelClick.bind(this);
-        this.onAddCommClick = this.onAddCommClick.bind(this);
     }
+
     componentWillReceiveProps(nextProps) {
         const {
             alb_id,
@@ -49,21 +50,15 @@ class AlbumView extends Component {
             comments
         })
     }
+
     componentDidMount() {
         const {alb_id} = this.props.match.params;
         this.props.getAlbum(alb_id);
         this.props.getAllComments(alb_id);
     }
+
     onDelClick() {
         this.props.deleteAlbum(this.state.alb_id, this.state.name, this.props.history);
-    }
-    onAddCommClick(e) {
-        e.preventDefault();
-        const newComment = {
-            text: this.state.text,
-            mark: this.state.mark
-        }
-        this.props.addComment(this.state.alb_id, newComment, this.props.history)
     }
 
     onChange(e) {
@@ -71,16 +66,18 @@ class AlbumView extends Component {
     }
 
     render() {
-        const album = this.props.album;
+        const {album} = this.props
+        const {isAdmin} = this.props
 
-        const isAdmin = () => {
-            if (true) {
+        const adminBlock = (isAdmin) => {
+            if (isAdmin) {
                 return (
-                    <React.Fragment >
-                        <Link to={`/music-manage/album/${this.state.alb_id}`} style={{marginTop:'10px'}} className="btn btn-primary" >
+                    <React.Fragment>
+                        <Link to={`/music-manage/album/${this.state.alb_id}`} style={{marginTop: '10px'}}
+                              className="btn btn-primary">
                             Edit
                         </Link>
-                        <button style={{marginTop:'10px'}} className="btn btn-secondary"
+                        <button style={{marginTop: '10px'}} className="btn btn-secondary"
                                 onClick={this.onDelClick}>
                             Delete
                         </button>
@@ -88,9 +85,9 @@ class AlbumView extends Component {
                 )
             }
         }
-        const adminOptions = isAdmin();
+        const adminOptions = adminBlock(isAdmin);
 
-        return(
+        return (
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
@@ -100,7 +97,7 @@ class AlbumView extends Component {
                         <p className="lead">Genre: {this.state.genre}</p>
                         <h5 className="display-4">{this.state.averageScore}</h5>
                     </div>
-                    <div className="col-lg-3">
+                    <div className="col-lg-5">
                         <div className="card-body">
                             <ul className="list-group">
                                 <SongBoard songs={this.state.songs} isAdmin={true}/>
@@ -108,32 +105,10 @@ class AlbumView extends Component {
                             {adminOptions}
                         </div>
                     </div>
-                    <div className="col-lg-6">
-                        <CommentBoard comments={this.state.comments} isAdmin={true} alb_id={album.alb_id}/>
-                        <div style={{marginTop:'20px'}}>Add comment below: </div>
-                        <div className="form-group mt-3">
-                            <form onSubmit={this.onAddCommClick} encType="multipart/form-data">
-                                <div className="form-group">
-                                    <input type="text" name="text"
-                                           // value={this.state.text}
-
-                                           value="My new comment"
-                                           onChange={this.onChange}
-                                           className="form-control" placeholder="Enter message:"/>
-                                </div>
-                                <div className="form-group">
-                                    <input type="text" name="mark"
-                                           // value={this.state.mark}
-                                        value="My new mark"
-                                           onChange={this.onChange}
-                                           className="form-control" placeholder="Put your mark (1-10):"/>
-                                </div>
-                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                <div className="form-group">
-                                    <button type="submit" className="btn btn-primary">Comment</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div className="col-lg-4">
+                        <CommentBoard comments={this.state.comments} isAdmin={true} alb_id={album.alb_id}
+                        isAdmin={isAdmin}/>
+                        <AddComment alb_id={album.alb_id}/>
                     </div>
                 </div>
             </div>

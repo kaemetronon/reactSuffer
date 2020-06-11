@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import ReactAudioPlayer from 'react-audio-player';
+
 
 class SongBoard extends Component {
 
@@ -11,7 +13,18 @@ class SongBoard extends Component {
                 return (<p className="lead">No songs yet</p>)
             } else {
                 const songsObjects = songs.map(song =>
-                    <li className="list-group-item">{song.number}. {song.song_name}</li>
+                    <React.Fragment>
+                        <li className="list-group-item">
+                            <li className="list-group">
+                                {song.number}. {song.song_name}
+                            </li>
+                            <ReactAudioPlayer
+                                src={`/audio/${song.songPath}`}
+                                controls
+                                volume
+                            />
+                        </li>
+                    </React.Fragment>
                 )
                 return (
                     <React.Fragment>

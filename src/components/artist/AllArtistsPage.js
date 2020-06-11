@@ -14,14 +14,14 @@ class AllArtistsPage extends Component {
         const artists = this.props.artists;
         let resultArray = [];
         let totalRes;
-
+        const {isAdmin} = this.props
 
         const renderAlgorithm = artists => {
             if (artists.length < 1) {
                 return (<p className="lead">No artists yet</p>);
             } else {
                 const oneAlbum = artists.map(artist => (
-                    <MiniArtistPage key={artist.id} artist={artist}/>
+                    <MiniArtistPage key={artist.id} artist={artist} isAdmin={isAdmin}/>
                 ));
                 for (let i = 0; i < oneAlbum.length; i++) {
                     resultArray.push(oneAlbum[i])
@@ -35,7 +35,7 @@ class AllArtistsPage extends Component {
 
         return (
             <div className="card-columns">
-                    {totalRes}
+                                    {totalRes}
             </div>
         )
     }

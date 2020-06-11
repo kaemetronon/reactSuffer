@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {logIn} from '../actions/userActions'
-import PropTypes from 'prop-types'
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux'
 
 
 class SignIn extends Component {
@@ -61,8 +61,4 @@ class SignIn extends Component {
         )
     }
 }
-
-SignIn.propTypes = {
-    logIn: PropTypes.func.isRequired
-}
-export default SignIn;
+export default connect(null, {logIn})(SignIn);

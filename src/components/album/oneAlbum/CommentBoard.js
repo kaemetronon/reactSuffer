@@ -11,7 +11,7 @@ class CommentBoard extends Component {
     render() {
 
         const comments = this.props.comments;
-        const isAdmin = this.props.isAdmin;
+        const {isAdmin} = this.props;
         const alb_id = this.props.alb_id;
         let tempUserName; //достать из сторажда
         let resultBoard;
@@ -49,7 +49,7 @@ class CommentBoard extends Component {
                                                 {additionalBlock}
                                             </p>
                                         </div>
-                                        <div style={{overflow:"hidden"}}>
+                                        <div >
                                             <div style={{float: "left",marginTop:'20px'}}><p className="lead"></p><h5>{comment.text}</h5></div>
                                             <div style={{float: "right"}}><h5 className="display-4">{comment.mark}</h5>
                                             </div>

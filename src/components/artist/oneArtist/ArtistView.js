@@ -30,8 +30,7 @@ class ArtistView extends Component {
     }
 
     render() {
-        const isAdmin = true; //huh, that's a plug!
-
+        const {isAdmin} = this.props
         let totalRes;
         let resultArray=[];
 
@@ -40,7 +39,7 @@ class ArtistView extends Component {
                 return (<p className="lead">No albums yet</p>);
             } else {
                 const oneAlbum = albums.map(album => (
-                    <MiniAlbumPage key={album.alb_id} album={album}/>
+                    <MiniAlbumPage key={album.alb_id} album={album} fromAllAlbumsPage={false}/>
                 ));
                 for (let i = 0; i < oneAlbum.length; i++) {
                     resultArray.push(oneAlbum[i])

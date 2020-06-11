@@ -5,21 +5,22 @@ class MiniAlbumPage extends Component {
 
     render() {
         const album = this.props.album;
-
-        const isAdmin = () => {
-            if (/*some magic */ true/*true типа админ */) {
+        const {isAdmin} = this.props
+        const {fromAllAlbumsPage} = this.props
+        const adminFunc = (isAdmin) => {
+            if (isAdmin) {
                 return(
                     <Link to={`/music-manage/album/${album.alb_id}`} alb_id={album.alb_id}
                           className="btn btn-secondary">Edit</Link>
                 )
             }
         }
-        let adminBlock = isAdmin();
+        let adminBlock = adminFunc(isAdmin);
 
         return (
             <div className="row-cols-lg-14">
                 <div className="card">
-                    <img src={`/image/covers/${album.file}`} alt={album.file} className="card-img-top rounded" style={{maxWidth:'200px',maxHeigth:'200px'}}/>
+                    <img src={`/image/covers/${album.cover}`} alt={album.file} className="card-img-top rounded" style={{maxWidth:'200px',maxHeigth:'200px'}}/>
                     <div className="m-1">
                         <span>{album.name}</span>
                     </div>

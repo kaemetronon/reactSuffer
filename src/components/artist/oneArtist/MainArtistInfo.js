@@ -19,7 +19,7 @@ class MainArtistInfo extends Component {
             if (adminFlag) {
                 return (
                     <React.Fragment>
-                        <Link to={`/artist/{artist.id}/edit`} className="btn btn-primary">Edit</Link>
+                        <Link to={`/artist/${artist.id}/edit`} className="btn btn-primary">Edit</Link>
                         <button
                             onClick={this.onDel.bind(this, artist.id, artist.name)}
                             className="btn btn-secondary">

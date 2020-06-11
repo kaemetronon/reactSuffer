@@ -2,19 +2,21 @@ import React, {Component} from 'react'
 import {addAlbum, getAlbum} from "../../actions/albumActions";
 import PropTypes from 'prop-types'
 import {connect} from "react-redux";
-import {deleteSong} from "../../actions/songActions";
+import {deleteSong, addSong} from "../../actions/songActions";
 
 class EditAlbum extends Component {
     constructor(props) {
         super(props);
         this.state = {
             alb_id: '',
-            file: '',
+            cover: '',
             alb_name: '',
             art_name: '',
             songs: '',
             song_name: '',
-            genre: ''
+            genre: '',
+            newCover: '',
+            newSong: ''
         }
         this.onChange = this.onChange.bind(this);
         this.onSave = this.onSave.bind(this);
@@ -28,7 +30,7 @@ class EditAlbum extends Component {
             art_name,
             genre,
             songs,
-            file
+            cover
         } = nextProps.album
         this.setState({
             alb_id,
@@ -36,7 +38,7 @@ class EditAlbum extends Component {
             art_name,
             genre,
             songs,
-            file
+            cover
         })
     }
 
@@ -51,7 +53,7 @@ class EditAlbum extends Component {
             albName: this.state.alb_name,
             artistName: this.state.art_name,
             genre: this.state.genre,
-            file: this.state.file,
+            newCover: this.state.newCover,
         }
         this.props.addAlbum(newAlbum, this.props.history)
     }
@@ -59,7 +61,8 @@ class EditAlbum extends Component {
     onAdd(e) {
         e.preventDefault();
         const newSong = {
-            song_name: this.state.song_name
+            song_name: this.state.song_name,
+            newSong: this.state.newSong
         }
         const {alb_id} = this.props.match.params;
         this.props.addSong(alb_id, newSong);
@@ -84,7 +87,7 @@ class EditAlbum extends Component {
             } else {
                 const songObject = songs.map(song =>
                     <li className="list-group-item">{song.number}. {song.song_name}
-                        <button className="btn btn-secondary btn-sm" style={{float:"right"}}
+                        <button className="btn btn-secondary btn-sm" style={{float: "right"}}
                                 onClick={this.onDel.bind(this, song.id)}>Delete
                         </button>
                     </li>
@@ -100,7 +103,7 @@ class EditAlbum extends Component {
                     <h1 className="display-4">Music editor</h1>
                     <div className="row">
                         <div className="col-lg-3">
-                            <img src={`/image/covers/${this.state.file}`} className="img-thumbnail mr-4"/>
+                            <img src={`/image/covers/${this.state.cover}`} className="img-thumbnail mr-4"/>
                         </div>
                         <div className="col-lg-3">
                             <ul className="list-group">
@@ -109,19 +112,19 @@ class EditAlbum extends Component {
                         </div>
                         <div className="form-group col-md-6">
                             <form className="form-group" onSubmit={this.onSave}
-                                  encType="multipart/form-data" style={{marginBottom:'100px'}}>
+                                  encType="multipart/form-data" style={{marginBottom: '100px'}}>
                                 <input type="text" className="form-control" placeholder="Artist name"
-                                       style={{marginBottom:'5px'}}
+                                       style={{marginBottom: '5px'}}
                                        name="art_name"
                                        value={this.state.art_name}
                                        onChange={this.onChange}/>
                                 <input type="text" className="form-control" placeholder="Album name"
-                                       style={{marginBottom:'5px'}}
+                                       style={{marginBottom: '5px'}}
                                        name="alb_name"
                                        value={this.state.alb_name}
                                        onChange={this.onChange}/>
                                 <select className='form-control form-control-lg'
-                                        style={{marginBottom:'5px'}}
+                                        style={{marginBottom: '5px'}}
                                         name='genre'
                                         value={this.state.genre}
                                         onChange={this.onChange}>
@@ -134,48 +137,52 @@ class EditAlbum extends Component {
                                     <option value='LATIN'>LATIN</option>
                                     <option value='OTHER'>OTHER</option>
                                 </select>
-                                <div className="custom-file" style={{marginBottom:'5px'}}>
-                                    <input type="file"
-                                           name="albCover"
-                                        // value={this.state.file}
-                                           onChange={this.onChange}/>
-                                    <label className="custom-file-label">New image</label>
+                                <div className="custom-file" style={{marginBottom: '5px'}}>
+                                    <input type="file" className="custom-file-input"
+                                           name="newCover"
+                                            value={this.state.newCover}
+                                           id="newCover"/>
+                                    <label className="custom-file-label" htmlFor="newCover">New Cover</label>
                                 </div>
-                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                <button type="submit" className="btn btn-primary ml-3" style={{marginBottom:'5px'}}>Save</button>
+                                <button type="submit" className="btn btn-primary ml-3"
+                                        style={{marginBottom: '5px'}}>Save
+                                </button>
                             </form>
                             Add song
 
-                                <div className="form-group mt-3">
-                                    <form onSubmit={this.onAdd}
-                                          encType="multipart/form-data">
-                                        <div className="form-group">
-                                            <input type="text" name="songName" className="form-control"
-                                                   placeholder="Song name:"/>
-                                        </div>
-                                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                        <div className="form-group">
-                                            <button type="submit" className="btn btn-primary">Add</button>
-                                        </div>
-                                    </form>
-                                </div>
+                            <div className="form-group mt-3">
+                                <form onSubmit={this.onAdd}
+                                      encType="multipart/form-data">
+                                    <div className="form-group">
+                                        <input type="text" name="songName" className="form-control"
+                                               placeholder="Song name:"/>
+                                    </div>
+                                    <div className="custom-file" style={{marginBottom: '5px'}}>
+                                        <input type="file" className="custom-file-input"
+                                               name="newSong"
+                                               value={this.state.newSong}
+                                               id="newSong"/>
+                                        <label className="custom-file-label" htmlFor="newSong">New song</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <button type="submit" className="btn btn-primary">Add</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
 
-                    </div>
+                </div>
             </div>
         )
     }
 }
 
 EditAlbum.propTypes = {
-    getAlbum: PropTypes.func.isRequired,
-    deleteSong: PropTypes.func.isRequired,
-    addSong: PropTypes.func.isRequired,
     album: PropTypes.object.isRequired
 }
 const mapStateToProps = state => ({
     album: state.albumR.album
 })
 
-export default connect(mapStateToProps, {getAlbum, deleteSong})(EditAlbum)
+export default connect(mapStateToProps, {getAlbum, addAlbum, addSong, deleteSong})(EditAlbum)

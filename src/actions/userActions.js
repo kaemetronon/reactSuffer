@@ -13,6 +13,7 @@ import {
 //     })
 // }
 export const getUser = (id) => async dispatch => {
+    console.log('get usr')
     const res = {
         id: '0',
         username: 'Steeeeve',
@@ -36,6 +37,7 @@ export const getUser = (id) => async dispatch => {
 //     })
 // }
 export const getAllUsers = () => async dispatch => {
+    console.log('get all usrs')
     const res = [{
         id: '0',
         username: 'Steeeeve',
@@ -60,21 +62,25 @@ export const getAllUsers = () => async dispatch => {
 }
 
 export const editUser = (user, history) => async dispatch => {
+    console.log('edit usr')
     await axios.post(`http://localhost:8080/user/${user.id}`, user);
     history.push("/users")
 }
 
 export const addUser = (userDto, history) => async  dispatch => {
+    console.log('add usr')
     await axios.post(`http://localhost:8080/registration`, userDto);
     history.push(`/login`)
 }
 
 export const logIn = (userDto, history) => async  dispatch => {
+    console.log('login')
     await axios.post(`http://localhost:8080/login`, userDto);
     history.push(`/login`)
 }
 
 export const logOut = () => async  dispatch => {
+    console.log('logout')
     // хз какой запрос к серверу должен быть на этот случай
     dispatch({
         type: LOG_OUT

@@ -2,11 +2,13 @@ import axios from "axios";
 import {GET_ALL_COMMENTS, EDIT_COMMENT, DELETE_COMMENT} from "../reducers/comment/commentTypes";
 
 export const addComment = (albId, comment, history) => async dispatch => {
+    console.log('add comm')
     await axios.post(`http://localhost:8080/album/${albId}`, comment);
     history.push(`/album/${albId}`)
 }
 
 export const commentEdit = (albId, commentId, comment, history) => async dispatch => {
+    console.log('edit comm')
     await axios.put(`http://localhost:8080/album/${albId}/comment/${commentId}/`, comment);
     dispatch({
         type: EDIT_COMMENT,
@@ -23,6 +25,7 @@ export const commentEdit = (albId, commentId, comment, history) => async dispatc
 //     });
 // }
 export const getAllComments = (albId) => async dispatch => {
+    console.log('get all comms')
     const res = [{
         commId: '0',
         albName: 'A beautiful lie',
@@ -45,6 +48,7 @@ export const getAllComments = (albId) => async dispatch => {
 }
 
 export const deleteComment = (albId, commId) => async dispatch => {
+    console.log('del comm')
     if (
         window.confirm(
             `You are deleting comment, this action cannot be undone`

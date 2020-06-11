@@ -14,13 +14,15 @@ class AllAlbumsPage extends Component {
         const albums = this.props.albums;
         let resultArray = [];
         let totalRes;
+        const {isAdmin} = this.props
 
         const renderAlgorithm = albums => {
             if (albums.length < 1) {
                 return (<p className="lead">No albums yet</p>);
             } else {
                 const oneAlbum = albums.map(album => (
-                    <MiniAlbumPage key={album.alb_id} album={album}/>
+                    <MiniAlbumPage key={album.alb_id} album={album} fromAllAlbumsPage={true}
+                                   isAdmin={isAdmin}/>
                 ));
                 for (let i = 0; i < oneAlbum.length; i++) {
                     resultArray.push(oneAlbum[i])

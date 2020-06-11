@@ -21,11 +21,11 @@ class MusicManagePage extends Component {
             artName: '',
             description: '',
             year: '',
-            image: '',
+            artImg: '',
             //for album
             albName: '',
             artistName: '',
-            file: '',
+            albImg: '',
             genre: ''
         }
         this.onChange = this.onChange.bind(this)
@@ -39,7 +39,7 @@ class MusicManagePage extends Component {
             artName: this.state.artName,
             description: this.state.description,
             year: this.state.year,
-            image: this.state.image
+            artImg: this.state.artImg
         }
         this.props.addArtist(newArtist, this.props.history);
     }
@@ -49,7 +49,7 @@ class MusicManagePage extends Component {
         const newAlbum = {
             albName: this.state.albName,
             artistName: this.state.artistName,
-            file: this.state.file,
+            albImg: this.state.albImg,
             genre: this.state.genre
         }
         this.props.addAlbum(newAlbum, this.props.history)
@@ -86,11 +86,10 @@ class MusicManagePage extends Component {
                                                placeholder="Year of activity"/>
                                         <div className="custom-file">
                                             <input type="file"
-                                                   name="artLogo" value={this.state.image}
-                                                   onChange={this.onChange} id="customFile2"/>
-                                            <label className="custom-file-label" htmlFor="customFile2">New image</label>
+                                                   name="artImg" value={this.state.artImg}
+                                                   onChange={this.onChange} id="artImg"/>
+                                            <label className="custom-file-label" htmlFor="artImg">New image</label>
                                         </div>
-                                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                         <button style={{marginTop: '15px'}} type="submit"
                                                 className="btn btn-primary">Add artist to base
                                         </button>
@@ -124,9 +123,9 @@ class MusicManagePage extends Component {
 
                                         <div className="custom-file">
                                             <input type="file"
-                                                   name="albCover" value={this.state.file}
-                                                   onChange={this.onChange} id="customFile"/>
-                                            <label className="custom-file-label" htmlFor="customFile">Choose
+                                                   name="albImg" value={this.state.albImg}
+                                                   onChange={this.onChange} id="albImg"/>
+                                            <label className="custom-file-label" htmlFor="albImg">Choose
                                                 file</label>
                                         </div>
 
@@ -136,7 +135,6 @@ class MusicManagePage extends Component {
                                                 onChange={this.onChange}>
                                             <option value='ROCK'>ROCK</option>
                                             <option value='HIP-HOP'>HIP-HOP</option>
-                                            <option value='classNameIC'>classNameIC</option>
                                             <option value='POP'>POP</option>
                                             <option value='JAZZ'>JAZZ</option>
                                             <option value='BLUES'>BLUES</option>
@@ -145,7 +143,6 @@ class MusicManagePage extends Component {
                                             <option value='OTHER'>OTHER</option>
                                         </select>
                                     </div>
-                                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                     <div className="form-group">
                                         <button type="submit" className="btn btn-primary">Add album</button>
                                     </div>

@@ -10,7 +10,7 @@ class EditArtist extends Component {
             name: '',
             year: '',
             description: '',
-            image: ''
+            artImg: ''
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -21,13 +21,13 @@ class EditArtist extends Component {
             name,
             year,
             description,
-            image
+            artImg
         } = nextProps.artist
         this.setState({
             name,
             year,
             description,
-            image
+            artImg
         })
     }
 
@@ -42,7 +42,7 @@ class EditArtist extends Component {
             name: this.state.name,
             years: this.state.years,
             description: this.state.description,
-            image: this.state.image,
+            artImg: this.state.artImg,
         }
         this.props.addArtist(newAlbum, this.props.history)
     }
@@ -55,10 +55,9 @@ class EditArtist extends Component {
         return (
             <div>
                 <h1 className="display-4">Artist editor</h1>
-
                 <div className="form-row">
-                    <img src={`/image/artists/${this.state.image}`} className="img-thumbnail"
-                         style={{maxWidth:'400px',maxHeigth:'400px'}}/>
+                    <img src={`/image/artists/${this.state.artImg}`} alt={this.state.artImg} className="img-thumbnail"
+                         style={{maxWidth: '400px', maxHeigth: '400px'}}/>
 
                     <div className="form-group col-md-6">
                         <form className="form-group" onSubmit={this.onSubmit} encType="multipart/form-data">
@@ -77,16 +76,12 @@ class EditArtist extends Component {
                       onChange={this.onChange}>
             </textarea>
                             </div>
-                            <div className="form-group">
-                                <div className="custom-file">
-                                    <input type="image"
-                                           name="imagePath"
-                                           value={this.state.image}
-                                           onChange={this.onChange} id="customFile"/>
-                                    <label className="custom-file-label">New image</label>
-                                </div>
+                            <div className="custom-file">
+                                <input type="file" name="artImg"
+                                       // value={this.state.artImg}
+                                       onChange={this.onChange} id="artImg"/>
+                                <label className="custom-file-label" htmlFor="artImg">New image</label>
                             </div>
-                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button type="submit" className="btn btn-primary ml-3">Save</button>
                         </form>
                     </div>
@@ -104,4 +99,4 @@ const mapStateToProps = state => ({
     artist: state.artistR.artist
 })
 
-export default connect(mapStateToProps, {getArtist})(EditArtist)
+export default connect(mapStateToProps, {getArtist, addArtist})(EditArtist)

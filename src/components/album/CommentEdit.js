@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {commentEdit} from '../../actions/commentActions'
+import {connect} from 'react-redux'
+
 
 class CommentEdit extends Component {
 
@@ -32,7 +34,7 @@ class CommentEdit extends Component {
         return (
             <div className="form-row">
                 <div className="form-group col-md-6">
-                    <form className="form-group" onSubmit={this.onSubmit}>
+                    <form onSubmit={this.onSubmit} className="form-group" >
                         <input type="text" className="form-control"
                                name="text"
                                value={this.state.text}
@@ -43,7 +45,6 @@ class CommentEdit extends Component {
                                value={this.state.mark}
                                onChange={this.onChange}
                                placeholder="Your mark (1-10)"/>
-                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <button type="submit" className="btn btn-primary ml-3">Save</button>
                     </form>
                 </div>
@@ -53,4 +54,4 @@ class CommentEdit extends Component {
 }
 
 
-export default CommentEdit
+export default connect(null, {commentEdit})(CommentEdit)

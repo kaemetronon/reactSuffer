@@ -1,0 +1,14 @@
+тут типа музыкальные файлы, но я же не самоубийца загружать с ними на гит
+их название должно полностью совпадать с названием полей заглушки
+'attack.mp3'
+'a beautiful lie.mp3'
+'the kill.mp3'
+'was it a dream.mp3'
+'the fantasy.mp3'
+'savior.mp3'
+'from yesterday.mp3'
+'the story.mp3'
+'revolve.mp3'
+'a modern myth.mp3'
+'battle of one.mp3'
+'hunter.mp3'

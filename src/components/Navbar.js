@@ -8,18 +8,18 @@ import PropTypes from 'prop-types'
 class Navbar extends Component {
 
     onClick() {
-        this.props.logOut();
+        logOut();
     }
 
     render() {
-        let adminPanel;
+        let navbarPanel;
         let forPeopleWhoSuccessfulyLoggedInToOurGorgeousWebSite;
-        const name = this.props.user
-        const isAdmin = true; // plug
+        const name = this.props.name
+        const {isAdmin} = this.props
+        const {isAuthorised} = this.props
 
-
-        const adminRenderFunc = (isAdmin) => {
-            if (isAdmin) {
+        const authorisedRenderFunc = (isAuthorised, isAdmin) => {
+            if (isAuthorised) {
                 return (
                     <React.Fragment>
                         <li className="nav-item">
@@ -31,6 +31,15 @@ class Navbar extends Component {
                         <li className="nav-item">
                             <Link to='/artists' className="nav-link">Artists</Link>
                         </li>
+                        {adminRenderFunc(isAdmin)}
+                    </React.Fragment>
+                )
+            }
+        }
+        const adminRenderFunc = (isAdmin) => {
+            if (isAdmin) {
+                return (
+                    <React.Fragment>
                         <li className="nav-item">
                             <Link to="/user" className="nav-link">User List</Link>
                         </li>
@@ -63,7 +72,7 @@ class Navbar extends Component {
                 )
             }
         };
-        adminPanel = adminRenderFunc(isAdmin);
+        navbarPanel = authorisedRenderFunc(isAuthorised, isAdmin);
         forPeopleWhoSuccessfulyLoggedInToOurGorgeousWebSite = isLoggedIn();
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -77,10 +86,10 @@ class Navbar extends Component {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            {adminPanel}
+                            {navbarPanel}
                         </ul>
 
-                        <div className="navbar-text mx-3">{this.props.user}</div>
+                        <div className="navbar-text mx-3">{this.props.name}</div>
 
                         {forPeopleWhoSuccessfulyLoggedInToOurGorgeousWebSite}
                     </div>
@@ -89,12 +98,13 @@ class Navbar extends Component {
         );
     }
 }
+
 Navbar.propTypes = {
-    logOut: PropTypes.func.isRequired
+    name: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({
-    user: state.userR.user.name
+    name: state.userR.user.name
 })
 
 export default connect(mapStateToProps, null)(Navbar)

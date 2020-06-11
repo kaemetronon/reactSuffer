@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {addUser} from "../actions/userActions";
+import {connect} from 'react-redux'
+
 
 class Register extends Component {
     constructor() {
@@ -27,7 +29,7 @@ class Register extends Component {
             fName: this.state.fName,
             lName: this.state.lName
         }
-        addUser(user, this.props.history);
+        this.props.addUser(user, this.props.history);
     }
 
     render() {
@@ -87,4 +89,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default connect(null, {addUser}) (Register);

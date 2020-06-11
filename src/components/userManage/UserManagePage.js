@@ -11,7 +11,6 @@ class UserManagePage extends Component {
     }
 
     render() {
-        console.log(this.props.users)
         return (
             <div className="App">
                 <CustomTable data={this.props.users}/>

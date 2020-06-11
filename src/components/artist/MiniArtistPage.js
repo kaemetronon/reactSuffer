@@ -5,20 +5,21 @@ import {Link} from "react-router-dom";
 class MiniArtistPage extends Component {
 
     render() {
-        const artist = this.props.artist;
+        const {artist} = this.props
+        const {isAdmin} = this.props
 
-        const isAdmin = () => {
-            if (/*some magic */ true/*true типа админ */) {
+        const adminFunc = (isAdmin => {
+            if (isAdmin) {
                 return (
                     <Link to={`/artist/${artist.id}/edit`} className="btn btn-secondary">Edit</Link>
                 )
             }
-        }
-        let adminBlock = isAdmin();
+        })
+        const adminBlock = adminFunc(isAdmin);
 
         return (
             <div class="card my-3">
-                <img src={`/image/artists/${artist.image}`} class="card-img-top rounded" style={{maxWidth:'200px',maxHeigth:'200px'}}/>
+                <img src={`/image/artists/${artist.artImg}`} class="card-img-top rounded" style={{maxWidth:'200px',maxHeigth:'200px'}}/>
 
                 <div class="m-2">
                     <span class="lead">{artist.name}</span>
